@@ -10,7 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.madlevel4task1.model.Product
 import com.example.madlevel4task1.repository.ProductRepository
 import kotlinx.android.synthetic.main.fragment_first.*
-import kotlinx.android.synthetic.main.fragment_first.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -67,15 +65,6 @@ class FirstFragment : Fragment() {
 
         fabDelete.setOnClickListener {
             removeAllProducts()
-        }
-    }
-
-    private fun removeAllProducts() {
-        mainScope.launch {
-            withContext(Dispatchers.IO) {
-                productRepository.deleteAllProducts()
-            }
-            getShoppingListFromDatabase()
         }
     }
 
@@ -143,14 +132,12 @@ class FirstFragment : Fragment() {
         }
     }
 
-    private fun validateFields(txtProductName: EditText , txtAmount: EditText): Boolean {
-        return if (txtProductName.text.toString().isNotBlank()
-            && txtAmount.text.toString().isNotBlank()
-        ) {
-            true
-        } else {
-            Toast.makeText(activity, "Please fill in the fields", Toast.LENGTH_LONG).show()
-            false
+    private fun removeAllProducts() {
+        mainScope.launch {
+            withContext(Dispatchers.IO) {
+                productRepository.deleteAllProducts()
+            }
+            getShoppingListFromDatabase()
         }
     }
 
@@ -165,4 +152,16 @@ class FirstFragment : Fragment() {
             this@FirstFragment.productAdapter.notifyDataSetChanged()
         }
     }
+
+    private fun validateFields(txtProductName: EditText , txtAmount: EditText): Boolean {
+        return if (txtProductName.text.toString().isNotBlank()
+            && txtAmount.text.toString().isNotBlank()
+        ) {
+            true
+        } else {
+            Toast.makeText(activity, "Please fill in the fields", Toast.LENGTH_LONG).show()
+            false
+        }
+    }
+
 }
