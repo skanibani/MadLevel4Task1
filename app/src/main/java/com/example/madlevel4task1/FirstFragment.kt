@@ -53,10 +53,6 @@ class FirstFragment : Fragment() {
         getShoppingListFromDatabase()
 
         initViews()
-
-        fabAdd.setOnClickListener {
-            showAddProductDialog()
-        }
     }
 
     private fun initViews() {
@@ -64,6 +60,23 @@ class FirstFragment : Fragment() {
         rvProducts.adapter = productAdapter
         rvProducts.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         createItemTouchHelper().attachToRecyclerView(rvProducts)
+
+        fabAdd.setOnClickListener {
+            showAddProductDialog()
+        }
+
+        fabDelete.setOnClickListener {
+            removeAllProducts()
+        }
+    }
+
+    private fun removeAllProducts() {
+        mainScope.launch {
+            withContext(Dispatchers.IO) {
+                productRepository.deleteAllProducts()
+            }
+            getShoppingListFromDatabase()
+        }
     }
 
     private fun createItemTouchHelper(): ItemTouchHelper {
