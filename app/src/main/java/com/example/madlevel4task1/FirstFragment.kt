@@ -63,6 +63,7 @@ class FirstFragment : Fragment() {
         rvProducts.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         rvProducts.adapter = productAdapter
         rvProducts.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+        createItemTouchHelper().attachToRecyclerView(rvProducts)
     }
 
     private fun createItemTouchHelper(): ItemTouchHelper {
