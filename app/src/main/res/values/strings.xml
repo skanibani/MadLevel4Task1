@@ -12,4 +12,9 @@
 
     <string name="dev_product_amount">3</string>
     <string name="dev_product_name">Komkommer</string>
+    
+    <string name="dialog_add_product">Add a product to the List!</string>
+    <string name="dialog_ok_btn">OK</string>
+    <string name="add_product">Add Product</string>
+    <string name="amount">Amount</string>
 </resources>

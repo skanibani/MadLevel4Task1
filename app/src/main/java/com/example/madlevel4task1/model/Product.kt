@@ -10,9 +10,9 @@ data class Product(
         var productName: String,
 
         @ColumnInfo(name = "quantity")
-        var productQuantity: Short,
+        var productQuantity: Int,
 
         @PrimaryKey(autoGenerate = true)
         @ColumnInfo(name = "id")
-        var id: Long?
+        var id: Long? = null
 )
